@@ -1465,3 +1465,234 @@ body,
 .projects-table__pagination-arrow i {
   font-size: 14px;
 }
+
+/* Clear Filters — follows the last filter pill in the flex row */
+.filter-chips-figma__clear-filters {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0c79a8;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  line-height: 16px;
+}
+
+.filter-chips-figma__clear-filters:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Keyword filter dropdown
+   ========================================================================== */
+
+.keyword-filter-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Count badge — visible only when keywords are added */
+.keyword-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0c79a8;
+  border-radius: 30px;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.keyword-count-badge:empty {
+  display: none;
+}
+
+/* When button is in applied (blue) state, invert badge colors */
+.filter-chips-figma__dropdown-btn--applied .keyword-count-badge {
+  color: #0c79a8;
+  background-color: #fff;
+}
+
+/* Dropdown panel */
+.keyword-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  width: 320px;
+  background: #fff;
+  border: 1px solid #dad8d7;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.keyword-dropdown[hidden] {
+  display: none;
+}
+
+/* Tab header */
+.keyword-dropdown__tabs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.keyword-dropdown__tab {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 10px 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #1c1f22;
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.keyword-dropdown__tab:hover {
+  border-bottom-color: rgba(28, 31, 34, 0.25);
+}
+
+.keyword-dropdown__tab--active {
+  font-weight: 700;
+  border-bottom-color: #1c1f22;
+}
+
+/* Panel show/hide */
+.keyword-dropdown__panel--hidden {
+  display: none;
+}
+
+/* Input section — one per input field */
+.keyword-dropdown__input-section {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.keyword-dropdown__input-section:last-child {
+  padding-bottom: 0;
+}
+
+.keyword-dropdown__input {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 300;
+  color: #4a4f55;
+  background: #feffff;
+  border: 1px solid #88888e;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+  outline: none;
+}
+
+.keyword-dropdown__input::placeholder {
+  color: #4a4f55;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.keyword-dropdown__input:focus {
+  border-color: #0c79a8;
+  box-shadow: 0 0 0 2px rgba(12, 121, 168, 0.15);
+  font-style: normal;
+  color: #1c1f22;
+}
+
+/* Pills row */
+.keyword-dropdown__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.keyword-dropdown__pills:empty {
+  display: none;
+}
+
+/* Individual keyword pill */
+.keyword-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 8px;
+  background-color: #e7e6e5;
+  border: none;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1c1f22;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.keyword-pill__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background: none;
+  border: none;
+  color: #1c1f22;
+  cursor: pointer;
+  padding: 0;
+  font-size: 11px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.keyword-pill__remove:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+/* Footer */
+.keyword-dropdown__footer {
+  border-top: 2px solid #e7e6e5;
+  padding-top: 10px;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+
+.keyword-dropdown__clear-all {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0c79a8;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 16px;
+}
+
+.keyword-dropdown__clear-all:hover {
+  text-decoration: underline;
+}

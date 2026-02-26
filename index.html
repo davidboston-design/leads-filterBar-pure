@@ -79,11 +79,43 @@
                   <div class="all-filters-dropdown__list" id="all-filters-list"></div>
                 </div>
               </div>
-              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-magnifying-glass filter-chips-figma__chevron" aria-hidden="true"></i>
-                Keywords
-                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
-              </button>
+              <div class="keyword-filter-wrap" id="keyword-filter-wrap">
+                <button type="button" class="filter-chips-figma__dropdown-btn" id="keyword-filter-btn" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa-solid fa-magnifying-glass filter-chips-figma__chevron" aria-hidden="true"></i>
+                  Keywords
+                  <span class="keyword-count-badge" id="keyword-count-badge"></span>
+                  <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+                </button>
+                <div class="keyword-dropdown" id="keyword-dropdown" hidden>
+                  <div class="keyword-dropdown__tabs">
+                    <button type="button" class="keyword-dropdown__tab keyword-dropdown__tab--active" data-kw-tab="keywords">Keywords</button>
+                    <button type="button" class="keyword-dropdown__tab" data-kw-tab="advanced">Advanced Options</button>
+                  </div>
+                  <div class="keyword-dropdown__panel" id="keyword-panel-keywords">
+                    <div class="keyword-dropdown__input-section">
+                      <input type="text" class="keyword-dropdown__input" id="keyword-input-main" placeholder="Enter Keyword(s), Project ID" autocomplete="off">
+                      <div class="keyword-dropdown__pills" id="keyword-pills-main"></div>
+                    </div>
+                  </div>
+                  <div class="keyword-dropdown__panel keyword-dropdown__panel--hidden" id="keyword-panel-advanced">
+                    <div class="keyword-dropdown__input-section">
+                      <input type="text" class="keyword-dropdown__input" id="keyword-input-name" placeholder="Project Name Keywords" autocomplete="off">
+                      <div class="keyword-dropdown__pills" id="keyword-pills-name"></div>
+                    </div>
+                    <div class="keyword-dropdown__input-section">
+                      <input type="text" class="keyword-dropdown__input" id="keyword-input-details" placeholder="Project Details Keywords" autocomplete="off">
+                      <div class="keyword-dropdown__pills" id="keyword-pills-details"></div>
+                    </div>
+                    <div class="keyword-dropdown__input-section">
+                      <input type="text" class="keyword-dropdown__input" id="keyword-input-docs" placeholder="Project Documents Keywords" autocomplete="off">
+                      <div class="keyword-dropdown__pills" id="keyword-pills-docs"></div>
+                    </div>
+                  </div>
+                  <div class="keyword-dropdown__footer">
+                    <button type="button" class="keyword-dropdown__clear-all" id="keyword-clear-all">Clear All</button>
+                  </div>
+                </div>
+              </div>
               <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
                 Stage
                 <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
@@ -100,11 +132,12 @@
                 Project Value
                 <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
               </button>
-              <button type="button" class="filter-chips-figma__dropdown-btn filter-chips-figma__dropdown-btn--applied" aria-haspopup="true" aria-expanded="false">
-                Updated: Last 90 Days
+              <button type="button" class="filter-chips-figma__dropdown-btn filter-chips-figma__dropdown-btn--applied" id="updated-filter-btn" data-default-label="Updated" aria-haspopup="true" aria-expanded="false">
+                <span class="filter-label-text">Updated: Last 90 Days</span>
                 <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
               </button>
               <div id="filter-chips-figma__added"></div>
+              <button type="button" class="filter-chips-figma__clear-filters" id="clear-filters-btn" style="display:none">Clear Filters</button>
             </div>
           </div>
         </div>
@@ -948,6 +981,8 @@
     ).length;
     badge.textContent = count > 0 ? count : '';
     badge.style.display = count > 0 ? '' : 'none';
+    var clearBtn = document.getElementById('clear-filters-btn');
+    if (clearBtn) clearBtn.style.display = count > 0 ? '' : 'none';
   }
 
   // ── Add / remove filter ───────────────────────────────────────────────────
@@ -1069,6 +1104,205 @@
   });
 
   updateBadge();
+})();
+</script>
+<script>
+(function () {
+  var wrap       = document.getElementById('keyword-filter-wrap');
+  var btn        = document.getElementById('keyword-filter-btn');
+  var dropdown   = document.getElementById('keyword-dropdown');
+  var countBadge = document.getElementById('keyword-count-badge');
+  var clearAllBtn = document.getElementById('keyword-clear-all');
+
+  if (!btn || !dropdown) return;
+
+  var tabs = Array.prototype.slice.call(dropdown.querySelectorAll('.keyword-dropdown__tab'));
+  var panels = {
+    keywords: document.getElementById('keyword-panel-keywords'),
+    advanced: document.getElementById('keyword-panel-advanced')
+  };
+  var inputs = {
+    main:    document.getElementById('keyword-input-main'),
+    name:    document.getElementById('keyword-input-name'),
+    details: document.getElementById('keyword-input-details'),
+    docs:    document.getElementById('keyword-input-docs')
+  };
+  var pillContainers = {
+    main:    document.getElementById('keyword-pills-main'),
+    name:    document.getElementById('keyword-pills-name'),
+    details: document.getElementById('keyword-pills-details'),
+    docs:    document.getElementById('keyword-pills-docs')
+  };
+
+  var keywords = { main: [], name: [], details: [], docs: [] };
+
+  function getTotalCount() {
+    return keywords.main.length + keywords.name.length +
+           keywords.details.length + keywords.docs.length;
+  }
+
+  function syncAllFiltersBadge() {
+    var badge = document.getElementById('all-filters-badge');
+    var clearBtn = document.getElementById('clear-filters-btn');
+    var count = document.querySelectorAll(
+      '#filter-chips-figma__added .filter-pill-added--applied, .filter-chips-figma__dropdown-btn--applied'
+    ).length;
+    if (badge) {
+      badge.textContent = count > 0 ? count : '';
+      badge.style.display = count > 0 ? '' : 'none';
+    }
+    if (clearBtn) clearBtn.style.display = count > 0 ? '' : 'none';
+  }
+
+  function updateButtonState() {
+    var total = getTotalCount();
+    if (total > 0) {
+      btn.classList.add('filter-chips-figma__dropdown-btn--applied');
+      countBadge.textContent = total;
+    } else {
+      btn.classList.remove('filter-chips-figma__dropdown-btn--applied');
+      countBadge.textContent = '';
+    }
+    syncAllFiltersBadge();
+  }
+
+  function renderPills(key) {
+    var container = pillContainers[key];
+    container.innerHTML = '';
+    keywords[key].forEach(function (kw) {
+      var pill = document.createElement('span');
+      pill.className = 'keyword-pill';
+
+      var label = document.createTextNode(kw);
+      var removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'keyword-pill__remove';
+      removeBtn.setAttribute('aria-label', 'Remove ' + kw);
+      removeBtn.innerHTML = '<i class="fa-regular fa-xmark" aria-hidden="true"></i>';
+      removeBtn.addEventListener('click', function () {
+        keywords[key] = keywords[key].filter(function (k) { return k !== kw; });
+        renderPills(key);
+        updateButtonState();
+      });
+
+      pill.appendChild(label);
+      pill.appendChild(removeBtn);
+      container.appendChild(pill);
+    });
+  }
+
+  function addKeyword(key) {
+    var input = inputs[key];
+    var val = input.value.trim();
+    if (!val) return;
+    if (keywords[key].indexOf(val) < 0) {
+      keywords[key].push(val);
+      renderPills(key);
+      updateButtonState();
+    }
+    input.value = '';
+  }
+
+  // Enter key adds keyword for each input
+  Object.keys(inputs).forEach(function (key) {
+    inputs[key].addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addKeyword(key);
+      }
+    });
+  });
+
+  // Tab switching
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var targetTab = tab.getAttribute('data-kw-tab');
+      tabs.forEach(function (t) { t.classList.remove('keyword-dropdown__tab--active'); });
+      tab.classList.add('keyword-dropdown__tab--active');
+      Object.keys(panels).forEach(function (key) {
+        panels[key].classList.toggle('keyword-dropdown__panel--hidden', key !== targetTab);
+      });
+      // Focus first input on the active tab
+      var firstInput = targetTab === 'advanced' ? inputs.name : inputs.main;
+      firstInput.focus();
+    });
+  });
+
+  // Clear All (inside dropdown)
+  clearAllBtn.addEventListener('click', function () {
+    Object.keys(keywords).forEach(function (key) {
+      keywords[key] = [];
+      renderPills(key);
+    });
+    updateButtonState();
+  });
+
+  // Expose for the global Clear Filters button
+  window._kwClearAll = function () {
+    Object.keys(keywords).forEach(function (key) {
+      keywords[key] = [];
+      renderPills(key);
+    });
+    updateButtonState();
+  };
+
+  // Global Clear Filters button — resets filter bar to default state
+  var clearFiltersBtn = document.getElementById('clear-filters-btn');
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', function () {
+      // 1. Clear all keywords
+      if (window._kwClearAll) window._kwClearAll();
+
+      // 2. Reset any applied filter pills back to their default label
+      document.querySelectorAll('.filter-chips-figma__dropdown-btn--applied').forEach(function (b) {
+        b.classList.remove('filter-chips-figma__dropdown-btn--applied');
+        var labelSpan = b.querySelector('.filter-label-text');
+        var defaultLabel = b.getAttribute('data-default-label');
+        if (labelSpan && defaultLabel) labelSpan.textContent = defaultLabel;
+      });
+
+      // 3. Remove dynamically added filter pills
+      var added = document.getElementById('filter-chips-figma__added');
+      if (added) added.querySelectorAll('.filter-pill-added').forEach(function (p) { p.remove(); });
+
+      // 4. Reset All Filters badge and hide Clear Filters button
+      var badge = document.getElementById('all-filters-badge');
+      if (badge) { badge.textContent = ''; badge.style.display = 'none'; }
+      clearFiltersBtn.style.display = 'none';
+    });
+  }
+
+  // Open / close
+  function openDropdown() {
+    dropdown.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    var activeTab = dropdown.querySelector('.keyword-dropdown__tab--active');
+    var tabKey = activeTab ? activeTab.getAttribute('data-kw-tab') : 'keywords';
+    var firstInput = tabKey === 'advanced' ? inputs.name : inputs.main;
+    setTimeout(function () { firstInput.focus(); }, 0);
+  }
+
+  function closeDropdown() {
+    dropdown.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.hidden ? openDropdown() : closeDropdown();
+  });
+
+  dropdown.addEventListener('click', function (e) { e.stopPropagation(); });
+
+  document.addEventListener('click', function (e) {
+    if (!dropdown.hidden && !wrap.contains(e.target)) closeDropdown();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !dropdown.hidden) { closeDropdown(); btn.focus(); }
+  });
+
+  updateButtonState();
 })();
 </script>
 </body>
