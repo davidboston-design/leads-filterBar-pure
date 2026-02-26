@@ -1,0 +1,1467 @@
+/* ==========================================================================
+   Search page - Containers and filter bar (Figma 3261-34355)
+   Two white containers on light grey: (1) filter bar container, (2) main content container
+   ========================================================================== */
+
+/* Page background #f4f4f4 everywhere so no white on sides (body + main content area) */
+body,
+.app,
+.app__body,
+.main-content {
+  background-color: #f4f4f4;
+}
+
+/* Page header: no white background (transparent over grey) */
+.page-header,
+.page-header__title-wrap {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+/* Filter bar container and main content container: shared card styling */
+.search-page__filter-container,
+.search-page__content-container {
+  border-radius: 4px;
+  border-top: 1px solid var(--Secondary-Colors-color_Grey, #dad8d7);
+  background: #fff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Filter bar container: no padding — header and content have their own */
+.search-page__filter-container {
+  box-sizing: border-box;
+  margin: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Filter container header: 52px, horizontal 20px padding, bottom border
+   ========================================================================== */
+.filter-container__header {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 20px;
+  border-bottom: 1px solid #c1c7cd;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.filter-container__tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-container__tab {
+  display: flex;
+  align-items: center;
+  padding: 10px 2px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #1c1f22;
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.filter-container__tab:hover {
+  color: #1c1f22;
+  border-bottom-color: rgba(28, 31, 34, 0.25);
+}
+
+.filter-container__tab--active {
+  font-weight: 700;
+  border-bottom-color: #1c1f22;
+}
+
+.filter-container__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.filter-container__link {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0c79a8;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.filter-container__link:hover {
+  text-decoration: underline;
+}
+
+.filter-container__save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #00a1e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.filter-container__save-btn:hover {
+  background-color: #0090c8;
+}
+
+/* Filter container content: 20px padding, stacked with gap */
+.filter-container__content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+/* page-header-figma classes kept for backwards compat but no longer used in HTML */
+
+/* ==========================================================================
+   Figma design: Large search input
+   ========================================================================== */
+.search-input-figma {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px 0 16px;
+  background-color: #feffff;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-default);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-input-figma:focus-within {
+  border-color: var(--color-border-active);
+  box-shadow: 0 0 0 2px rgba(12, 121, 168, 0.1);
+}
+
+.search-input-figma__field {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  min-height: 42px;
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  outline: none;
+  font-family: inherit;
+}
+
+.search-input-figma__field::placeholder {
+  color: var(--color-hint-text);
+  font-style: italic;
+}
+
+.search-input-figma__icon {
+  font-size: 18px;
+  color: #0C79A8;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Figma design: Filter row (All Filters + Stage, Category, Location, etc.)
+   Node 3347-31226
+   ========================================================================== */
+.filter-chips-figma {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* All Filters wrapper: right border separator + anchor for dropdown */
+.filter-chips-figma__all-wrap {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 10px;
+  border-right: 1px solid #e7e6e5;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* All Filters button: gray pill with filter icon + blue badge */
+.filter-chips-figma__dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  color: #1c1f22;
+  background-color: #e7e6e5;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.filter-chips-figma__dropdown:hover {
+  background-color: #d5d4d3;
+}
+
+.filter-chips-figma__filter-icon {
+  font-size: 12px;
+  color: #1c1f22;
+}
+
+/* Badge showing count of applied filters */
+.filter-chips-figma__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #0c79a8;
+  border-radius: 30px;
+}
+
+/* Individual filter pills: outline style (transparent bg, ghost border) */
+.filter-chips-figma__dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  color: #1c1f22;
+  background-color: transparent;
+  border: 1px solid #88888e;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.filter-chips-figma__dropdown-btn:hover {
+  background-color: rgba(136, 136, 142, 0.08);
+}
+
+/* Applied state: solid blue pill, white text */
+.filter-chips-figma__dropdown-btn--applied {
+  background-color: #0c79a8;
+  border-color: #0c79a8;
+  color: #fff;
+}
+
+.filter-chips-figma__dropdown-btn--applied:hover {
+  background-color: #0a6b94;
+  border-color: #0a6b94;
+}
+
+.filter-chips-figma__dropdown-btn--applied .filter-chips-figma__chevron {
+  color: #fff;
+}
+
+.filter-chips-figma__chevron {
+  font-size: 12px;
+  color: #1c1f22;
+  flex-shrink: 0;
+}
+
+/* All Filters button: open/active state */
+.filter-chips-figma__dropdown--open {
+  background-color: #4a4f55;
+  color: #feffff;
+}
+
+.filter-chips-figma__dropdown--open .filter-chips-figma__filter-icon {
+  color: #feffff;
+}
+
+.filter-chips-figma__dropdown--open .filter-chips-figma__badge {
+  background-color: #fff;
+  color: #0c79a8;
+}
+
+/* ==========================================================================
+   All Filters dropdown panel
+   ========================================================================== */
+.all-filters-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 200;
+  width: 320px;
+  background: #fff;
+  border: 1px solid #dad8d7;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.all-filters-dropdown[hidden] {
+  display: none;
+}
+
+/* Search input */
+.all-filters-dropdown__search {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  border: 1px solid #88888e;
+  border-radius: 4px;
+  background: #feffff;
+  padding: 0 8px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.all-filters-dropdown__search-icon {
+  font-size: 16px;
+  color: #1c1f22;
+  flex-shrink: 0;
+}
+
+.all-filters-dropdown__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  font-style: italic;
+  color: #4a4f55;
+  font-family: inherit;
+  padding: 0 8px;
+}
+
+.all-filters-dropdown__search input::placeholder {
+  color: #4a4f55;
+  font-style: italic;
+}
+
+/* Filter list */
+.all-filters-dropdown__list {
+  display: flex;
+  flex-direction: column;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.all-filters-dropdown__item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a4f55;
+  background: #fff;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.all-filters-dropdown__item:hover {
+  background-color: #f4f4f4;
+}
+
+.all-filters-dropdown__empty {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #88888e;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Added filter pill: two-part pill (outline label + blue X)
+   ========================================================================== */
+#filter-chips-figma__added {
+  display: contents;
+}
+
+.filter-pill-added {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 1px;
+  height: 32px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.filter-pill-added__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  color: #1c1f22;
+  background-color: transparent;
+  border: 1px solid #88888e;
+  border-radius: 30px 0 0 30px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.filter-pill-added__label:hover {
+  background-color: rgba(136, 136, 142, 0.08);
+}
+
+.filter-pill-added__label--open {
+  background-color: rgba(12, 121, 168, 0.1);
+  border-color: #0c79a8;
+  color: #1c1f22;
+}
+
+/* Added filter pill dropdown panel */
+.filter-pill-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 300;
+  width: 300px;
+  background: #fff;
+  border: 1px solid #dad8d7;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.filter-pill-dropdown[hidden] {
+  display: none;
+}
+
+.filter-pill-dropdown__body {
+  padding: 12px 16px;
+}
+
+.filter-pill-dropdown__hint {
+  margin: 0;
+  font-size: 13px;
+  color: #88888e;
+  font-style: italic;
+}
+
+.filter-pill-dropdown__footer {
+  padding: 8px 16px;
+  border-top: 1px solid #e7e6e5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-pill-dropdown__clear {
+  font-size: 14px;
+  font-weight: 700;
+  color: #88888e;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filter-pill-dropdown__clear:hover {
+  color: #1c1f22;
+  text-decoration: underline;
+}
+
+.filter-pill-dropdown__apply {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #0c79a8;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filter-pill-dropdown__apply:hover {
+  background-color: #0a6b94;
+}
+
+.filter-pill-added__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  background-color: transparent;
+  border: 1px solid #88888e;
+  border-radius: 0 30px 30px 0;
+  color: #1c1f22;
+  cursor: pointer;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.filter-pill-added__remove:hover {
+  background-color: rgba(136, 136, 142, 0.08);
+}
+
+.filter-pill-added__remove--open {
+  background-color: #0c79a8;
+  border-color: #0c79a8;
+  color: #fff;
+}
+
+.filter-pill-added__remove--open:hover {
+  background-color: #0a6b94;
+  border-color: #0a6b94;
+}
+
+/* Main content container: 20px padding, gap below filter container */
+.search-page__content-container {
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Inner padding comes from containers; avoid double padding */
+.search-page__content-container .actions-bar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.search-page__content-container .main-content__results {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* All buttons 32px height (filter chips, page header, actions bar, etc.) */
+.page-header__btn {
+  height: 32px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.actions-bar__view-btn,
+.actions-bar__preview-btn {
+  height: 32px;
+  padding: 0 12px;
+  font-weight: var(--font-weight-bold);
+  box-sizing: border-box;
+}
+
+.actions-bar__more {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+/* Filter bar: contents only (container provides 20px padding) */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 32px;
+  box-sizing: border-box;
+}
+
+.filter-bar__load-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  background-color: var(--color-light-grey);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filter-bar__load-search-icon {
+  font-size: 14px;
+  color: var(--color-dark-grey);
+}
+
+.filter-bar__chevron {
+  font-size: 10px;
+  color: var(--color-dark-grey);
+  flex-shrink: 0;
+}
+
+/* Keyword input: 220px wide, 32px tall, placeholder italic, magnifying glass on right */
+.filter-bar__keyword-wrap {
+  display: flex;
+  align-items: center;
+  width: 220px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  background-color: #feffff;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-default);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.filter-bar__keyword-wrap:focus-within {
+  border-color: var(--color-border-active);
+  box-shadow: 0 0 0 2px rgba(12, 121, 168, 0.1);
+}
+
+.filter-bar__keyword {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  outline: none;
+  font-family: inherit;
+}
+
+.filter-bar__keyword::placeholder {
+  color: var(--color-hint-text);
+  font-style: italic;
+}
+
+.filter-bar__keyword-icon {
+  font-size: 16px;
+  color: var(--color-hint-text);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+/* Filter dropdown triggers: default gray; applied = light blue bg, teal text */
+.filter-bar__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Filter chip wrapper for dropdown positioning */
+.filter-bar__filter-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.filter-bar__filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px 0 12px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  background-color: var(--color-light-grey);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+/* Not applied: hover */
+.filter-bar__filter-btn:hover {
+  background-color: var(--color-grey);
+}
+
+/* Not applied: active / dropdown open */
+.filter-bar__filter-btn--active,
+.filter-bar__filter-wrap--open .filter-bar__filter-btn {
+  background-color: var(--color-dark-grey);
+  color: var(--color-white);
+  border-color: var(--color-blue);
+}
+
+.filter-bar__filter-wrap--open .filter-bar__filter-btn .filter-bar__chevron {
+  color: var(--color-white);
+}
+
+.filter-bar__filter-wrap--open .filter-bar__filter-btn--applied .filter-bar__chevron {
+  color: var(--color-blue);
+}
+
+/* Applied (single value, not removable) */
+.filter-bar__filter-btn--applied {
+  background-color: var(--color-light-blue);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-blue);
+}
+
+.filter-bar__filter-btn--applied:hover {
+  background-color: #CEE4EE;
+}
+
+.filter-bar__filter-btn--applied .filter-bar__filter-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+}
+
+/* Applied + dropdown open: keep applied styling (light blue) with teal border */
+.filter-bar__filter-btn--applied.filter-bar__filter-btn--active,
+.filter-bar__filter-wrap--open .filter-bar__filter-btn--applied {
+  background-color: var(--color-light-blue);
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.filter-bar__filter-wrap--open .filter-bar__filter-btn--applied .filter-bar__filter-value {
+  color: var(--color-text-default);
+}
+
+/* Applied & removable: same as applied, with remove button */
+.filter-bar__filter-btn--removable {
+  padding-right: 4px;
+}
+
+.filter-bar__filter-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-dark-grey);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.filter-bar__filter-remove i {
+  font-size: 14px;
+}
+
+.filter-bar__filter-remove:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: var(--color-text-default);
+}
+
+/* Bar chips (Stage, Category, etc.) are NOT removable - never show × */
+.filter-bar__filter-wrap[data-filter] .filter-bar__filter-remove {
+  display: none !important;
+}
+
+/* Added chips (from More Filters panel) ARE removable - 32x32, FontAwesome times, 1px white left border */
+.filter-bar__added-chip .filter-bar__filter-remove {
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  border-left: 1px solid #fff;
+  margin-left: 0;
+  border-radius: 0;
+}
+
+.filter-bar__added-chip .filter-bar__filter-remove i {
+  font-size: 14px;
+}
+
+.filter-bar__filter-btn .filter-bar__chevron {
+  margin-left: 2px;
+}
+
+/* Multi-applied: badge with count (hidden in default state; JS shows when +N) */
+.filter-bar__filter-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  background-color: var(--color-dark-grey);
+  border-radius: 9px;
+}
+
+.filter-bar__filter-btn--applied .filter-bar__filter-badge {
+  background-color: var(--color-blue);
+}
+
+/* Show divider + Clear All only when at least one filter is applied */
+.filter-bar:not(.filter-bar--has-filters) .filter-bar__divider,
+.filter-bar:not(.filter-bar--has-filters) .filter-bar__clear-all {
+  display: none;
+}
+
+/* Dropdown panel (below chip) */
+.filter-bar__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+  min-width: 220px;
+  max-width: 320px;
+  max-height: 360px;
+  background: #fff;
+  border: 1px solid var(--color-light-grey);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.filter-bar__filter-wrap--open .filter-bar__dropdown {
+  display: flex;
+}
+
+.filter-bar__dropdown-search {
+  flex-shrink: 0;
+  padding: 8px;
+  border-bottom: 1px solid var(--color-light-grey);
+}
+
+.filter-bar__dropdown-search input {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  font-size: var(--font-size-body);
+  font-family: inherit;
+  border: 1px solid var(--color-light-grey);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.filter-bar__dropdown-search input::placeholder {
+  color: var(--color-hint-text);
+}
+
+.filter-bar__dropdown-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+  max-height: 280px;
+}
+
+.filter-bar__dropdown-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  font-size: var(--font-size-body);
+  font-family: inherit;
+  color: var(--color-text-default);
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-bar__dropdown-option:hover {
+  background-color: #fafafa;
+}
+
+.filter-bar__dropdown-option input {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.filter-bar__dropdown-footer {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-top: 1px solid var(--color-light-grey);
+  background: #fafafa;
+}
+
+.filter-bar__dropdown-clear {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal-blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.filter-bar__dropdown-clear:hover {
+  text-decoration: underline;
+}
+
+.filter-bar__more-link {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-teal-blue);
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.filter-bar__more-link:hover {
+  text-decoration: underline;
+}
+
+.filter-bar__divider {
+  width: 1px;
+  height: 20px;
+  background-color: var(--color-grey);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+.filter-bar__clear-all {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-teal-blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.filter-bar__clear-all:hover {
+  text-decoration: underline;
+}
+
+/* Spacer so filter bar content aligns left, Clear All stays right when present */
+.filter-bar__spacer {
+  flex: 1;
+  min-width: 12px;
+}
+
+/* Header icon placeholders (Figma: three circular icons right of logo) */
+.app-header__icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 12px;
+}
+
+.app-header__icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+.app-header__icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Figma: Actions bar with results count (no tabs) */
+.actions-bar--figma {
+  padding: 0 0 16px 0;
+  min-height: 56px;
+}
+
+.actions-bar__results-count {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+}
+
+/* Actions bar: active tab blue underline (Figma) */
+.actions-bar__tab--active::after {
+  background-color: var(--color-teal-blue);
+}
+
+/* View toggle: List active = blue (Figma) */
+.actions-bar__view-btn--active {
+  background-color: var(--color-teal-blue) !important;
+  color: var(--color-white) !important;
+  border-color: var(--color-teal-blue) !important;
+}
+
+.actions-bar__view-btn--active:hover {
+  background-color: var(--color-teal-blue) !important;
+  color: var(--color-white) !important;
+}
+
+/* Table: Project Value right-aligned (Figma) */
+.projects-table__th--value,
+.projects-table__td--value {
+  text-align: right;
+}
+
+/* ==========================================================================
+   Added filter chips (from More Filters panel) - removable
+   ========================================================================== */
+
+.filter-bar__added-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-bar__added-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 0 0 12px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-blue);
+  background-color: var(--color-light-blue);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter-bar__added-chip .filter-bar__filter-label {
+  color: var(--color-blue);
+}
+
+.filter-bar__added-chip .filter-bar__filter-value {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-blue);
+}
+
+.filter-bar__added-chip-chevron {
+  font-size: 10px;
+  color: var(--color-dark-grey);
+  flex-shrink: 0;
+}
+
+.filter-bar__added-chip:hover {
+  background-color: #CEE4EE;
+}
+
+/* ==========================================================================
+   Filters panel (right side, from More Filters +)
+   ========================================================================== */
+
+.filters-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.filters-panel-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.filters-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  max-width: 90vw;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.filters-panel.is-open {
+  transform: translateX(0);
+}
+
+.filters-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--color-light-grey);
+  border-left: 4px solid var(--color-teal-blue);
+  flex-shrink: 0;
+}
+
+.filters-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+}
+
+.filters-panel__close {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-default);
+  font-size: 18px;
+  border-radius: 50%;
+}
+
+.filters-panel__close:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: var(--color-text-default);
+}
+
+.filters-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px 0;
+}
+
+.filters-panel__applied-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+
+.filters-panel__applied-count {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+}
+
+.filters-panel__clear-all-link {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: #0C79A8;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filters-panel__clear-all-link:hover {
+  text-decoration: underline;
+}
+
+.filters-panel__no-active {
+  margin: 0 0 20px;
+  font-size: var(--font-size-body);
+  color: var(--color-hint-text);
+  font-style: italic;
+}
+
+.filters-panel__category {
+  margin-bottom: 24px;
+}
+
+.filters-panel__category:last-child {
+  margin-bottom: 0;
+}
+
+.filters-panel__category-title {
+  margin: 0 0 12px;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filters-panel__section {
+  border-bottom: 1px solid var(--color-light-grey);
+}
+
+.filters-panel__section--last {
+  border-bottom: none;
+}
+
+.filters-panel__section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+
+.filters-panel__section-header:hover {
+  background-color: transparent;
+  color: var(--color-teal-blue);
+}
+
+.filters-panel__section-header--applied {
+  position: relative;
+  padding-left: 16px;
+}
+
+.filters-panel__section-header--applied::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0C79A8;
+}
+
+.filters-panel__chevron {
+  font-size: 10px;
+  color: var(--color-dark-grey);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.filters-panel__section-header[aria-expanded="true"] .filters-panel__chevron {
+  transform: rotate(180deg);
+}
+
+.filters-panel__section-content {
+  padding: 0 0 12px;
+  overflow: hidden;
+}
+
+.filters-panel__section-header[aria-expanded="true"] + .filters-panel__section-content {
+  display: block;
+}
+
+.filters-panel__section-header[aria-expanded="false"] + .filters-panel__section-content {
+  display: none;
+}
+
+.filters-panel__search {
+  margin-bottom: 8px;
+}
+
+.filters-panel__search input {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  font-size: var(--font-size-body);
+  border: 1px solid var(--color-light-grey);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.filters-panel__options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filters-panel__option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-default);
+  cursor: pointer;
+}
+
+.filters-panel__option input {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.filters-panel__footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-light-grey);
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.filters-panel__cancel {
+  height: 32px;
+  padding: 0 16px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal-blue);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filters-panel__cancel:hover {
+  text-decoration: underline;
+}
+
+.filters-panel__apply {
+  height: 32px;
+  padding: 0 16px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-white);
+  background-color: var(--color-teal-blue);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.filters-panel__apply:hover {
+  background-color: #008fc7;
+}
+
+/* FontAwesome overrides: reset mask-based icon rules from base CSS */
+.page-header__btn-icon {
+  background: none;
+  -webkit-mask: none;
+  mask: none;
+  font-size: 16px;
+}
+
+.actions-bar__view-icon {
+  background: none;
+  -webkit-mask: none;
+  mask: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  font-size: 16px;
+}
+
+.actions-bar__more-icon {
+  background: none;
+  -webkit-mask: none;
+  mask: none;
+  font-size: 16px;
+  color: var(--color-dark-grey);
+}
+
+.projects-table__icon-button i {
+  font-size: 16px;
+}
+
+/* Project name cell: link + ellipsis (Figma) */
+.projects-table__td--name {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.projects-table__td--name .projects-table__link {
+  flex: 1;
+  min-width: 0;
+}
+
+.projects-table__more-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-hint-text);
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.projects-table__more-link:hover {
+  color: var(--color-text-default);
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.projects-table__more-link i {
+  font-size: 14px;
+}
+
+/* Left nav: 60px width, no icons (Figma 3295-525708) */
+.left-nav {
+  width: 60px;
+  min-width: 60px;
+}
+
+.left-nav__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  min-height: 48px;
+  padding: 0;
+  border: none;
+  border-left: 4px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.left-nav__button:hover {
+  background: rgba(1, 48, 74, 0.35);
+  border-left-color: var(--sidebar-border-hover);
+}
+
+.left-nav__button--active,
+.left-nav__button--active:hover {
+  background: rgba(1, 48, 74, 0.6);
+  border-left-color: var(--sidebar-border-selected);
+}
+
+.projects-table__pagination-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-table__pagination-arrow i {
+  font-size: 14px;
+}

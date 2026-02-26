@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search – ConstructConnect Project Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/3d14c46c3e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/index-R-VZaRxh.css">
+  <link rel="stylesheet" href="assets/search-page.css">
+</head>
+<body>
+  <div id="root" class="app">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="app-header" role="banner">
+      <div class="app-header__left">
+        <button type="button" class="menu-toggle-button" aria-label="Toggle navigation" aria-expanded="false" style="display: none;">
+          <div class="menu-icon">
+            <span class="menu-icon__bar menu-icon__bar--top"></span>
+            <span class="menu-icon__bar menu-icon__bar--middle"></span>
+            <span class="menu-icon__bar menu-icon__bar--bottom"></span>
+          </div>
+        </button>
+        <a href="/" class="app-header__logo" aria-label="ConstructConnect Home">
+          <img src="assets/Main_White-C-tzHIDp.png" alt="ConstructConnect" class="app-header__logo-img">
+        </a>
+      </div>
+      <div class="app-header__right">
+        <div class="app-header__icons">
+          <button type="button" class="app-header__icon-btn" aria-label="History"><i class="fa-light fa-clock-rotate-left"></i></button>
+          <button type="button" class="app-header__icon-btn" aria-label="Notifications"><i class="fa-light fa-bell"></i></button>
+          <button type="button" class="app-header__icon-btn" aria-label="Profile"><i class="fa-light fa-user"></i></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="app__body">
+      <nav class="left-nav" aria-label="Main navigation">
+        <div class="left-nav__items">
+          <button type="button" class="left-nav__button left-nav__button--active" aria-label="Projects"></button>
+          <button type="button" class="left-nav__button" aria-label="Companies"></button>
+          <button type="button" class="left-nav__button" aria-label="More"></button>
+          <button type="button" class="left-nav__button" aria-label="Settings"></button>
+        </div>
+      </nav>
+
+      <main id="main-content" class="main-content" role="main">
+        <!-- Figma: Filter container with header (tabs + actions) and content (search + filter bar) -->
+        <div class="search-page__filter-container">
+          <div class="filter-container__header">
+            <div class="filter-container__tabs">
+              <button type="button" class="filter-container__tab filter-container__tab--active">Projects</button>
+              <button type="button" class="filter-container__tab">Companies</button>
+            </div>
+            <div class="filter-container__actions">
+              <a href="#" class="filter-container__link">Start a New Search</a>
+              <button type="button" class="filter-container__save-btn">
+                <i class="fa-light fa-floppy-disk" aria-hidden="true"></i>
+                Save Search
+              </button>
+            </div>
+          </div>
+          <div class="filter-container__content">
+            <div class="filter-chips-figma">
+              <div class="filter-chips-figma__all-wrap">
+                <button type="button" class="filter-chips-figma__dropdown" id="filters-trigger-figma" aria-haspopup="listbox" aria-expanded="false">
+                  <i class="fa-light fa-filter filter-chips-figma__filter-icon" aria-hidden="true"></i>
+                  All Filters
+                  <span class="filter-chips-figma__badge" id="all-filters-badge">1</span>
+                </button>
+                <div class="all-filters-dropdown" id="all-filters-dropdown" hidden role="listbox" aria-label="Add filters">
+                  <div class="all-filters-dropdown__search">
+                    <i class="fa-regular fa-magnifying-glass all-filters-dropdown__search-icon" aria-hidden="true"></i>
+                    <input type="text" id="all-filters-search" placeholder="Search" autocomplete="off" aria-label="Search filters">
+                  </div>
+                  <div class="all-filters-dropdown__list" id="all-filters-list"></div>
+                </div>
+              </div>
+              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-magnifying-glass filter-chips-figma__chevron" aria-hidden="true"></i>
+                Keywords
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
+                Stage
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
+                Category
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
+                Location
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="filter-chips-figma__dropdown-btn" aria-haspopup="true" aria-expanded="false">
+                Project Value
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="filter-chips-figma__dropdown-btn filter-chips-figma__dropdown-btn--applied" aria-haspopup="true" aria-expanded="false">
+                Updated: Last 90 Days
+                <i class="fa-solid fa-caret-down filter-chips-figma__chevron" aria-hidden="true"></i>
+              </button>
+              <div id="filter-chips-figma__added"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="filters-panel-overlay" id="filters-panel-overlay" aria-hidden="true"></div>
+        <aside class="filters-panel" id="filters-panel" role="dialog" aria-labelledby="filters-panel-title" aria-modal="true">
+          <div class="filters-panel__header">
+            <h2 class="filters-panel__title" id="filters-panel-title">Filters</h2>
+            <button type="button" class="filters-panel__close" id="filters-panel-close" aria-label="Close filters"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="filters-panel__body">
+            <div class="filters-panel__applied-wrap" id="filters-panel-applied-wrap" style="display: none;">
+              <span class="filters-panel__applied-count" id="filters-panel-applied-count">0 Filters Applied</span>
+              <button type="button" class="filters-panel__clear-all-link" id="filters-panel-clear-all">Clear All</button>
+            </div>
+            <p class="filters-panel__no-active" id="filters-panel-no-active">No Active Filters.</p>
+            <div class="filters-panel__category">
+              <h3 class="filters-panel__category-title">Company Filters</h3>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="company-properties" aria-expanded="false">Company Properties <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="company-role" aria-expanded="false">Company Role <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="company-location" aria-expanded="false">Company Location <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+            </div>
+            <div class="filters-panel__category">
+              <h3 class="filters-panel__category-title">Project Filters</h3>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-properties" aria-expanded="false">Project Properties <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="search-tags" aria-expanded="false">Search Tags <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="last-updated" aria-expanded="false">Last Updated <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="bid-date" aria-expanded="false">Bid Date <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="stage" data-panel-filter="stage" aria-expanded="false">Stage <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content">
+                  <div class="filters-panel__options">
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-stage" value="planning"> Planning</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-stage" value="conceptual"> Conceptual</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-stage" value="design"> Design</label>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="location" data-panel-filter="location" aria-expanded="false">Location <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content">
+                  <div class="filters-panel__options">
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-location" value="chicago"> Chicago, IL</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-location" value="houston"> Houston, TX</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-location" value="phoenix"> Phoenix, AZ</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="panel-location" value="denver"> Denver, CO</label>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-category" data-panel-filter="category" aria-expanded="false">Project Category <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content">
+                  <div class="filters-panel__options">
+                    <label class="filters-panel__option"><input type="checkbox" name="project-category" value="addition"> Addition</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="project-category" value="demolition"> Demolition</label>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="owner" data-panel-filter="owner" aria-expanded="false">Owner <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content">
+                  <div class="filters-panel__search">
+                    <input type="text" placeholder="Search" aria-label="Search owners">
+                  </div>
+                  <div class="filters-panel__options">
+                    <label class="filters-panel__option"><input type="checkbox" name="owner" value="dost-mohammad"> Dost Mohammad</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="owner" value="alex-smith"> Alex Smith</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="owner" value="brenda-chen"> Brenda Chen</label>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-company" data-panel-filter="project-company" aria-expanded="false">Project Company <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content">
+                  <div class="filters-panel__options">
+                    <label class="filters-panel__option"><input type="checkbox" name="project-company" value="project-intelligence"> Project Intelligence</label>
+                    <label class="filters-panel__option"><input type="checkbox" name="project-company" value="acme"> Acme Corp</label>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-type" aria-expanded="false">Project Type <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="sector" aria-expanded="false">Sector <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="trade" aria-expanded="false">Trade <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-value" aria-expanded="false">Project Value <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="document-type" aria-expanded="false">Document Type <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="created-date" aria-expanded="false">Created Date <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="start-date" aria-expanded="false">Start Date <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="pre-bid-meeting" aria-expanded="false">Pre-Bid Meeting <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="project-section" aria-expanded="false">Project Section <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section">
+                <button type="button" class="filters-panel__section-header" data-section="contracting-method" aria-expanded="false">Contracting Method <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+              <div class="filters-panel__section filters-panel__section--last">
+                <button type="button" class="filters-panel__section-header" data-section="certifications" aria-expanded="false">Certifications <i class="fa-light fa-chevron-down filters-panel__chevron"></i></button>
+                <div class="filters-panel__section-content"></div>
+              </div>
+            </div>
+          </div>
+          <div class="filters-panel__footer">
+            <button type="button" class="filters-panel__cancel" id="filters-panel-cancel">Cancel</button>
+            <button type="button" class="filters-panel__apply" id="filters-panel-apply">Apply Filters</button>
+          </div>
+        </aside>
+
+        <div class="search-page__content-container">
+          <div class="actions-bar actions-bar--figma">
+            <h2 class="actions-bar__results-count">200 Results</h2>
+            <div class="actions-bar__controls">
+              <div class="actions-bar__view-toggle">
+                <button type="button" class="actions-bar__view-btn actions-bar__view-btn--active"><i class="fa-light fa-list actions-bar__view-icon"></i> List</button>
+                <button type="button" class="actions-bar__view-btn"><i class="fa-light fa-map actions-bar__view-icon"></i> Map</button>
+              </div>
+              <button type="button" class="actions-bar__more" aria-label="Column settings"><i class="fa-light fa-ellipsis-vertical actions-bar__more-icon"></i></button>
+            </div>
+          </div>
+
+        <div class="main-content__results">
+          <div class="projects-table-container">
+            <div style="overflow: auto; flex: 1; min-height: 0;">
+              <table class="projects-table" role="grid">
+                <thead>
+                  <tr>
+                    <th class="projects-table__th projects-table__th--checkbox"><input type="checkbox" aria-label="Select all"></th>
+                    <th class="projects-table__th projects-table__th--pin"><span class="visually-hidden">Favorite</span></th>
+                    <th class="projects-table__th projects-table__th--name">Project Name</th>
+                    <th class="projects-table__th projects-table__th--value">Project Value</th>
+                    <th class="projects-table__th projects-table__th--location">Location</th>
+                    <th class="projects-table__th projects-table__th--stage">Stage</th>
+                    <th class="projects-table__th projects-table__th--updated">Bid Date</th>
+                    <th class="projects-table__th projects-table__th--trade">Start Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">2023 Concrete Cutting</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$5,000,000</td>
+                    <td class="projects-table__td projects-table__td--location">Winnipeg, MB</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--conceptual">Conceptual</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Dec 8, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Feb 19, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">2024-2025 Fire Suppression Systems Upgrade</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$1,000,000</td>
+                    <td class="projects-table__td projects-table__td--location">Macon, GA</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--conceptual">Conceptual</span></td>
+                    <td class="projects-table__td projects-table__td--updated"></td>
+                    <td class="projects-table__td projects-table__td--trade">Feb 19, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Regional Hospital Emergency Dept. Expansion</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$8,500,000</td>
+                    <td class="projects-table__td projects-table__td--location">Phoenix, AZ</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--planning">Planning</span></td>
+                    <td class="projects-table__td projects-table__td--updated"></td>
+                    <td class="projects-table__td projects-table__td--trade">Apr 15, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">2023 Concrete Cutting and Coring Services</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$320,000</td>
+                    <td class="projects-table__td projects-table__td--location">Philadelphia, PA</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--post-bid">Post-Bid</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Nov 20, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Jan 6, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Municipal Water Treatment Plant Upgrade</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$2,100,000</td>
+                    <td class="projects-table__td projects-table__td--location">San Antonio, TX</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--bidding">Bidding</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Feb 1, 2025</td>
+                    <td class="projects-table__td projects-table__td--trade">—</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Highway 401 Interchange Improvements</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$15,000,000</td>
+                    <td class="projects-table__td projects-table__td--location">San Diego, CA</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--design">Design</span></td>
+                    <td class="projects-table__td projects-table__td--updated"></td>
+                    <td class="projects-table__td projects-table__td--trade">Jun 1, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">School District HVAC Modernization</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$1,850,000</td>
+                    <td class="projects-table__td projects-table__td--location">Dallas, TX</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--pre-construction">Pre-Construction</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Oct 5, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Dec 2, 2024</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Downtown Office Tower Foundation Package</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$6,700,000</td>
+                    <td class="projects-table__td projects-table__td--location">San Jose, CA</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--in-progress">In Progress</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Aug 12, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Sep 9, 2024</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Retail Plaza Site Development</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$890,000</td>
+                    <td class="projects-table__td projects-table__td--location">Austin, TX</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--complete">Complete</span></td>
+                    <td class="projects-table__td projects-table__td--updated">May 3, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">May 20, 2024</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Library Branch Renovation and Addition</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$3,200,000</td>
+                    <td class="projects-table__td projects-table__td--location">Jacksonville, FL</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--conceptual">Conceptual</span></td>
+                    <td class="projects-table__td projects-table__td--updated"></td>
+                    <td class="projects-table__td projects-table__td--trade">—</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Industrial Warehouse Distribution Center</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$4,500,000</td>
+                    <td class="projects-table__td projects-table__td--location">Columbus, OH</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--design">Design</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Jan 22, 2025</td>
+                    <td class="projects-table__td projects-table__td--trade">Mar 10, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Transit Station Accessibility Upgrades</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$1,200,000</td>
+                    <td class="projects-table__td projects-table__td--location">Charlotte, NC</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--bidding">Bidding</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Feb 14, 2025</td>
+                    <td class="projects-table__td projects-table__td--trade">—</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Multi-Family Residential Complex Phase 1</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$9,800,000</td>
+                    <td class="projects-table__td projects-table__td--location">Denver, CO</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--planning">Planning</span></td>
+                    <td class="projects-table__td projects-table__td--updated"></td>
+                    <td class="projects-table__td projects-table__td--trade">May 1, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Municipal Arena Ice Plant Replacement</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$650,000</td>
+                    <td class="projects-table__td projects-table__td--location">Seattle, WA</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--post-bid">Post-Bid</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Dec 1, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Jan 15, 2025</td>
+                  </tr>
+                  <tr class="projects-table__row">
+                    <td class="projects-table__td projects-table__td--checkbox"><input type="checkbox" aria-label="Select row"></td>
+                    <td class="projects-table__td projects-table__td--pin"><button type="button" class="projects-table__icon-button" aria-label="Add to favorites"><i class="fa-regular fa-star"></i></button></td>
+                    <td class="projects-table__td projects-table__td--name"><a href="#" class="projects-table__link truncate">Senior Living Facility Renovation</a><button type="button" class="projects-table__more-link" aria-label="More actions"><i class="fa-light fa-ellipsis"></i></button></td>
+                    <td class="projects-table__td projects-table__td--value">$2,400,000</td>
+                    <td class="projects-table__td projects-table__td--location">Halifax, NS</td>
+                    <td class="projects-table__td projects-table__td--stage"><span class="projects-table__stage projects-table__stage--in-progress">In Progress</span></td>
+                    <td class="projects-table__td projects-table__td--updated">Jul 8, 2024</td>
+                    <td class="projects-table__td projects-table__td--trade">Aug 1, 2024</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="projects-table__pagination projects-table__pagination-figma">
+              <div class="projects-table__pagination-rows">
+                <span class="projects-table__pagination-label">Rows per page</span>
+                <select class="projects-table__pagination-select" aria-label="Rows per page">
+                  <option value="100" selected>100</option>
+                  <option value="50">50</option>
+                  <option value="25">25</option>
+                </select>
+              </div>
+              <span class="projects-table__pagination-count">1-100 of 170538</span>
+              <div class="projects-table__pagination-arrows">
+                <button type="button" class="projects-table__pagination-arrow" aria-label="Previous page" disabled><i class="fa-light fa-chevron-left"></i></button>
+                <button type="button" class="projects-table__pagination-arrow" aria-label="Next page"><i class="fa-light fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+(function () {
+  var bar = document.querySelector('.filter-bar');
+  if (!bar) return;
+
+  var wraps = bar.querySelectorAll('.filter-bar__filter-wrap');
+  var clearAllBtn = bar.querySelector('.filter-bar__clear-all');
+
+  function getSelectedOptions(wrap) {
+    var dropdown = wrap.querySelector('.filter-bar__dropdown');
+    if (!dropdown) return [];
+    var inputs = dropdown.querySelectorAll('.filter-bar__dropdown-list input:checked');
+    return Array.from(inputs).map(function (inp) {
+      var label = inp.closest('label');
+      return { value: inp.value, text: label ? label.textContent.trim() : inp.value };
+    });
+  }
+
+  function updateChip(wrap) {
+    var btn = wrap.querySelector('.filter-bar__filter-btn');
+    var labelEl = wrap.querySelector('.filter-bar__filter-label');
+    var valueEl = wrap.querySelector('.filter-bar__filter-value');
+    var badgeEl = wrap.querySelector('.filter-bar__filter-badge');
+    var selected = getSelectedOptions(wrap);
+    var label = labelEl ? labelEl.textContent : '';
+
+    valueEl.textContent = '';
+    badgeEl.textContent = '';
+    badgeEl.style.display = 'none';
+    btn.classList.remove('filter-bar__filter-btn--applied');
+
+    if (selected.length === 0) return;
+
+    btn.classList.add('filter-bar__filter-btn--applied');
+    if (selected.length === 1) {
+      valueEl.textContent = selected[0].text;
+    } else {
+      badgeEl.textContent = '+' + selected.length;
+      badgeEl.style.display = 'inline-flex';
+    }
+  }
+
+  function updateBarHasFilters() {
+    var any = false;
+    wraps.forEach(function (w) {
+      if (getSelectedOptions(w).length > 0) any = true;
+    });
+    if (bar.querySelector('.filter-bar__added-chip')) any = true;
+    bar.classList.toggle('filter-bar--has-filters', any);
+    window.dispatchEvent(new CustomEvent('filters-changed'));
+  }
+
+  function closeAllDropdowns() {
+    wraps.forEach(function (w) {
+      w.classList.remove('filter-bar__filter-wrap--open');
+      var btn = w.querySelector('[data-filter-trigger]');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function clearFilter(wrap) {
+    var dropdown = wrap.querySelector('.filter-bar__dropdown');
+    if (dropdown) {
+      dropdown.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(function (inp) {
+        inp.checked = false;
+      });
+    }
+    updateChip(wrap);
+    updateBarHasFilters();
+    closeAllDropdowns();
+  }
+
+  wraps.forEach(function (wrap) {
+    var btn = wrap.querySelector('[data-filter-trigger]');
+    var dropdown = wrap.querySelector('.filter-bar__dropdown');
+    var removeEl = wrap.querySelector('.filter-bar__filter-remove');
+    var clearSelBtn = wrap.querySelector('.filter-bar__dropdown-clear');
+
+    if (btn) {
+      btn.addEventListener('click', function (e) {
+        if (e.target.closest('.filter-bar__filter-remove')) return;
+        e.stopPropagation();
+        var isOpen = wrap.classList.toggle('filter-bar__filter-wrap--open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        wraps.forEach(function (w) {
+          if (w !== wrap) {
+            w.classList.remove('filter-bar__filter-wrap--open');
+            var b = w.querySelector('[data-filter-trigger]');
+            if (b) b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+
+    if (removeEl) {
+      removeEl.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        clearFilter(wrap);
+      });
+      removeEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          clearFilter(wrap);
+        }
+      });
+    }
+
+    if (dropdown) {
+      dropdown.querySelectorAll('.filter-bar__dropdown-list input').forEach(function (inp) {
+        inp.addEventListener('change', function () {
+          updateChip(wrap);
+          updateBarHasFilters();
+        });
+      });
+      dropdown.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    if (clearSelBtn) {
+      clearSelBtn.addEventListener('click', function () {
+        if (dropdown) {
+          dropdown.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(function (inp) {
+            inp.checked = false;
+          });
+        }
+        updateChip(wrap);
+        updateBarHasFilters();
+      });
+    }
+  });
+
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      wraps.forEach(function (w) {
+        var dropdown = w.querySelector('.filter-bar__dropdown');
+        if (dropdown) {
+          dropdown.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(function (inp) {
+            inp.checked = false;
+          });
+        }
+        updateChip(w);
+      });
+      var addedContainer = bar.querySelector('.filter-bar__added-chips');
+      if (addedContainer) addedContainer.innerHTML = '';
+      updateBarHasFilters();
+      closeAllDropdowns();
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.filter-bar')) return;
+    closeAllDropdowns();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeAllDropdowns();
+  });
+
+  var addedChipsContainer = bar.querySelector('.filter-bar__added-chips');
+  bar.addEventListener('click', function (e) {
+    var addedChip = e.target.closest('.filter-bar__added-chip');
+    if (!addedChip) return;
+    if (e.target.closest('.filter-bar__filter-remove')) {
+      e.preventDefault();
+      addedChip.remove();
+      updateBarHasFilters();
+    }
+  });
+})();
+
+(function () {
+  var overlay = document.getElementById('filters-panel-overlay');
+  var panel = document.getElementById('filters-panel');
+  var moreBtn = document.getElementById('more-filters-trigger');
+  var cancelBtn = document.getElementById('filters-panel-cancel');
+  var applyBtn = document.getElementById('filters-panel-apply');
+  var closeBtn = document.getElementById('filters-panel-close');
+
+  var addedFilters = {};
+  var panelToBarMap = { 'panel-stage': 'stage', 'project-category': 'category' };
+
+  function getAppliedFilterCount(bar) {
+    if (!bar) return 0;
+    var count = 0;
+    bar.querySelectorAll('.filter-bar__filter-wrap[data-filter]').forEach(function (wrap) {
+      var btn = wrap.querySelector('.filter-bar__filter-btn--applied');
+      if (!btn) return;
+      var badge = wrap.querySelector('.filter-bar__filter-badge');
+      var m = badge && badge.textContent ? badge.textContent.match(/\+\s*(\d+)/) : null;
+      count += m ? parseInt(m[1], 10) : 1;
+    });
+    count += (bar.querySelectorAll('.filter-bar__added-chip').length || 0);
+    return count;
+  }
+
+  function getAppliedFilterIds(bar) {
+    var ids = {};
+    if (!bar) return ids;
+    var barToPanel = { stage: 'stage', category: 'category', location: 'location' };
+    bar.querySelectorAll('.filter-bar__filter-wrap[data-filter]').forEach(function (wrap) {
+      var fid = wrap.getAttribute('data-filter');
+      if (barToPanel[fid] && wrap.querySelector('.filter-bar__filter-btn--applied')) ids[barToPanel[fid]] = true;
+    });
+    bar.querySelectorAll('.filter-bar__added-chip').forEach(function (chip) {
+      var name = chip.getAttribute('data-added-filter');
+      if (name) ids[name] = true;
+    });
+    return ids;
+  }
+
+  function syncBarToPanel(bar) {
+    if (!bar) return;
+    var panelStage = panel.querySelectorAll('input[name="panel-stage"]');
+    var panelLocation = panel.querySelectorAll('input[name="panel-location"]');
+    var panelCategory = panel.querySelectorAll('input[name="project-category"]');
+    var stageWrap = bar.querySelector('[data-filter="stage"]');
+    var locWrap = bar.querySelector('[data-filter="location"]');
+    var catWrap = bar.querySelector('[data-filter="category"]');
+    function setFromBar(inputs, wrap) {
+      if (!wrap) return;
+      var dd = wrap.querySelector('.filter-bar__dropdown');
+      if (!dd) return;
+      var checked = Array.from(dd.querySelectorAll('input:checked')).map(function (i) { return i.value; });
+      inputs.forEach(function (inp) {
+        inp.checked = checked.indexOf(inp.value) >= 0;
+      });
+    }
+    setFromBar(panelStage, stageWrap);
+    setFromBar(panelLocation, locWrap);
+    setFromBar(panelCategory, catWrap);
+    var addedOwner = bar.querySelectorAll('.filter-bar__added-chip[data-added-filter="owner"]');
+    var addedCo = bar.querySelectorAll('.filter-bar__added-chip[data-added-filter="project-company"]');
+    panel.querySelectorAll('input[name="owner"]').forEach(function (inp) {
+      inp.checked = Array.from(addedOwner).some(function (c) { return c.getAttribute('data-added-value') === inp.value; });
+    });
+    panel.querySelectorAll('input[name="project-company"]').forEach(function (inp) {
+      inp.checked = Array.from(addedCo).some(function (c) { return c.getAttribute('data-added-value') === inp.value; });
+    });
+  }
+
+  function updatePanelAppliedState() {
+    var bar = document.querySelector('.filter-bar');
+    var count = getAppliedFilterCount(bar);
+    var ids = getAppliedFilterIds(bar);
+    var appliedWrap = document.getElementById('filters-panel-applied-wrap');
+    var appliedCount = document.getElementById('filters-panel-applied-count');
+    var noActiveEl = document.getElementById('filters-panel-no-active');
+    if (appliedWrap) appliedWrap.style.display = count > 0 ? 'flex' : 'none';
+    if (appliedCount) appliedCount.textContent = count + ' Filter' + (count === 1 ? '' : 's') + ' Applied';
+    if (noActiveEl) noActiveEl.style.display = count > 0 ? 'none' : '';
+    panel.querySelectorAll('.filters-panel__section-header[data-panel-filter]').forEach(function (h) {
+      var fid = h.getAttribute('data-panel-filter');
+      h.classList.toggle('filters-panel__section-header--applied', !!ids[fid]);
+    });
+  }
+
+  function openPanel() {
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    panel.classList.add('is-open');
+    var bar = document.querySelector('.filter-bar');
+    syncBarToPanel(bar);
+    updatePanelAppliedState();
+  }
+
+  function closePanel() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    panel.classList.remove('is-open');
+  }
+
+  function getPanelSelections() {
+    var sel = {};
+    panel.querySelectorAll('input[name]:checked').forEach(function (inp) {
+      var name = inp.getAttribute('name');
+      if (!sel[name]) sel[name] = [];
+      var label = inp.closest('label');
+      sel[name].push({ value: inp.value, text: label ? label.textContent.trim() : inp.value });
+    });
+    return sel;
+  }
+
+  function syncBarChipFromPanel(bar, filterId, panelName, labelText) {
+    var sel = getPanelSelections();
+    var opts = sel[panelName] || [];
+    var wrap = bar.querySelector('[data-filter="' + filterId + '"]');
+    if (!wrap) return;
+    var dd = wrap.querySelector('.filter-bar__dropdown');
+    var btn = wrap.querySelector('.filter-bar__filter-btn');
+    var valueEl = wrap.querySelector('.filter-bar__filter-value');
+    var badgeEl = wrap.querySelector('.filter-bar__filter-badge');
+    if (dd) dd.querySelectorAll('input').forEach(function (inp) {
+      inp.checked = opts.some(function (s) { return s.value === inp.value; });
+    });
+    btn.classList.remove('filter-bar__filter-btn--applied');
+    valueEl.textContent = '';
+    badgeEl.textContent = '';
+    badgeEl.style.display = 'none';
+    if (opts.length > 0) {
+      btn.classList.add('filter-bar__filter-btn--applied');
+      if (opts.length === 1) valueEl.textContent = opts[0].text;
+      else { badgeEl.textContent = '+' + opts.length; badgeEl.style.display = 'inline-flex'; }
+    }
+  }
+
+  function applyPanelFilters() {
+    var sel = getPanelSelections();
+    var bar = document.querySelector('.filter-bar');
+    if (!bar) {
+      closePanel();
+      return;
+    }
+    var addedContainer = bar.querySelector('.filter-bar__added-chips');
+    addedContainer.innerHTML = '';
+
+    ['owner', 'project-company'].forEach(function (name) {
+      var opts = sel[name] || [];
+      opts.forEach(function (o) {
+        var chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'filter-bar__added-chip';
+        chip.setAttribute('data-added-filter', name);
+        chip.setAttribute('data-added-value', o.value);
+        chip.innerHTML = '<span class="filter-bar__filter-label">' + (name === 'owner' ? 'Owner' : 'Project Company') + '</span> <span class="filter-bar__filter-value">' + o.text + '</span> <i class="fa-light fa-chevron-down filter-bar__added-chip-chevron" aria-hidden="true"></i> <span class="filter-bar__filter-remove" role="button" tabindex="0" aria-label="Remove"><i class="fa-solid fa-xmark"></i></span>';
+        addedContainer.appendChild(chip);
+      });
+    });
+
+    syncBarChipFromPanel(bar, 'stage', 'panel-stage', 'Stage');
+    syncBarChipFromPanel(bar, 'category', 'project-category', 'Category');
+    syncBarChipFromPanel(bar, 'location', 'panel-location', 'Location');
+
+    var hasFilters = addedContainer.children.length > 0 || bar.querySelectorAll('.filter-bar__filter-btn--applied').length > 0;
+    bar.classList.toggle('filter-bar--has-filters', hasFilters);
+    window.dispatchEvent(new CustomEvent('filters-changed'));
+    closePanel();
+  }
+
+  if (moreBtn) moreBtn.addEventListener('click', function (e) { e.preventDefault(); openPanel(); });
+  if (cancelBtn) cancelBtn.addEventListener('click', closePanel);
+  if (overlay) overlay.addEventListener('click', closePanel);
+  if (applyBtn) applyBtn.addEventListener('click', applyPanelFilters);
+
+  if (closeBtn) closeBtn.addEventListener('click', closePanel);
+
+  window.addEventListener('filters-changed', function () {
+    if (panel.classList.contains('is-open')) {
+      syncBarToPanel(document.querySelector('.filter-bar'));
+      updatePanelAppliedState();
+    }
+  });
+
+  var panelClearAll = document.getElementById('filters-panel-clear-all');
+  if (panelClearAll) {
+    panelClearAll.addEventListener('click', function () {
+      var bar = document.querySelector('.filter-bar');
+      if (bar) {
+        bar.querySelectorAll('.filter-bar__filter-wrap').forEach(function (wrap) {
+          var dd = wrap.querySelector('.filter-bar__dropdown');
+          if (dd) dd.querySelectorAll('input').forEach(function (inp) { inp.checked = false; });
+          var btn = wrap.querySelector('.filter-bar__filter-btn');
+          if (btn) btn.classList.remove('filter-bar__filter-btn--applied');
+          var ve = wrap.querySelector('.filter-bar__filter-value');
+          var be = wrap.querySelector('.filter-bar__filter-badge');
+          if (ve) ve.textContent = '';
+          if (be) { be.textContent = ''; be.style.display = 'none'; }
+        });
+        var ac = bar.querySelector('.filter-bar__added-chips');
+        if (ac) ac.innerHTML = '';
+        bar.classList.remove('filter-bar--has-filters');
+      }
+      panel.querySelectorAll('input[type="checkbox"]').forEach(function (inp) { inp.checked = false; });
+      updatePanelAppliedState();
+    });
+  }
+
+  panel.querySelectorAll('.filters-panel__section-header').forEach(function (h) {
+    h.addEventListener('click', function () {
+      var expanded = h.getAttribute('aria-expanded') === 'true';
+      h.setAttribute('aria-expanded', !expanded);
+    });
+  });
+
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+  });
+})();
+  </script>
+<script>
+(function () {
+  var AVAILABLE_FILTERS = [
+    { id: 'company-properties', label: 'Company Properties' },
+    { id: 'company-role',       label: 'Company Role' },
+    { id: 'company-location',   label: 'Company Location' },
+    { id: 'bid-date',           label: 'Bid Date' },
+    { id: 'project-type',       label: 'Project Type' },
+    { id: 'sector',             label: 'Sector' },
+    { id: 'trade',              label: 'Trade' },
+    { id: 'document-type',      label: 'Document Type' },
+    { id: 'created-date',       label: 'Created Date' },
+    { id: 'start-date',         label: 'Start Date' },
+    { id: 'pre-bid-meeting',    label: 'Pre-Bid Meeting' },
+    { id: 'project-properties', label: 'Project Properties' },
+    { id: 'search-tags',        label: 'Search Tags' },
+    { id: 'last-updated',       label: 'Last Updated' },
+  ];
+
+  var triggerBtn    = document.getElementById('filters-trigger-figma');
+  var dropdown      = document.getElementById('all-filters-dropdown');
+  var searchInput   = document.getElementById('all-filters-search');
+  var listEl        = document.getElementById('all-filters-list');
+  var addedContainer = document.getElementById('filter-chips-figma__added');
+  var badge         = document.getElementById('all-filters-badge');
+
+  if (!triggerBtn || !dropdown) return;
+
+  var addedIds = [];
+  var openPillEl = null;
+
+  // ── Pill dropdown open/close ──────────────────────────────────────────────
+
+  function closePillDropdown(pill) {
+    var dp = pill.querySelector('.filter-pill-dropdown');
+    if (dp) dp.hidden = true;
+    var lb = pill.querySelector('.filter-pill-added__label');
+    if (lb) lb.classList.remove('filter-pill-added__label--open');
+    var rb = pill.querySelector('.filter-pill-added__remove');
+    if (rb) rb.classList.remove('filter-pill-added__remove--open');
+    if (openPillEl === pill) openPillEl = null;
+  }
+
+  function openPillDropdown(pill) {
+    if (openPillEl && openPillEl !== pill) closePillDropdown(openPillEl);
+    var dp = pill.querySelector('.filter-pill-dropdown');
+    if (dp) dp.hidden = false;
+    var lb = pill.querySelector('.filter-pill-added__label');
+    if (lb) lb.classList.add('filter-pill-added__label--open');
+    var rb = pill.querySelector('.filter-pill-added__remove');
+    if (rb) rb.classList.add('filter-pill-added__remove--open');
+    openPillEl = pill;
+  }
+
+  // ── All Filters list ──────────────────────────────────────────────────────
+
+  function getFilteredList(query) {
+    var q = (query || '').toLowerCase().trim();
+    return AVAILABLE_FILTERS.filter(function (f) {
+      if (addedIds.indexOf(f.id) >= 0) return false;
+      return !q || f.label.toLowerCase().indexOf(q) >= 0;
+    });
+  }
+
+  function renderList(query) {
+    listEl.innerHTML = '';
+    var filters = getFilteredList(query);
+    if (filters.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'all-filters-dropdown__empty';
+      empty.textContent = 'No filters found';
+      listEl.appendChild(empty);
+      return;
+    }
+    filters.forEach(function (f) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'all-filters-dropdown__item';
+      btn.textContent = f.label;
+      btn.addEventListener('click', function () {
+        addFilter(f);
+        closeDropdown();
+      });
+      listEl.appendChild(btn);
+    });
+  }
+
+  // ── Badge ─────────────────────────────────────────────────────────────────
+
+  function updateBadge() {
+    var count = document.querySelectorAll(
+      '#filter-chips-figma__added .filter-pill-added--applied, .filter-chips-figma__dropdown-btn--applied'
+    ).length;
+    badge.textContent = count > 0 ? count : '';
+    badge.style.display = count > 0 ? '' : 'none';
+  }
+
+  // ── Add / remove filter ───────────────────────────────────────────────────
+
+  function addFilter(filter) {
+    addedIds.push(filter.id);
+
+    var pill = document.createElement('div');
+    pill.className = 'filter-pill-added';
+    pill.dataset.filterId = filter.id;
+
+    // Label button (toggles its own dropdown)
+    var labelBtn = document.createElement('button');
+    labelBtn.type = 'button';
+    labelBtn.className = 'filter-pill-added__label';
+    labelBtn.innerHTML =
+      filter.label + ' <i class="fa-solid fa-caret-down" aria-hidden="true"></i>';
+    labelBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var dp = pill.querySelector('.filter-pill-dropdown');
+      dp && dp.hidden ? openPillDropdown(pill) : closePillDropdown(pill);
+    });
+
+    // Remove button
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'filter-pill-added__remove';
+    removeBtn.setAttribute('aria-label', 'Remove ' + filter.label);
+    removeBtn.innerHTML = '<i class="fa-regular fa-xmark" aria-hidden="true"></i>';
+    removeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      removeFilter(filter.id);
+    });
+
+    // Dropdown panel
+    var dp = document.createElement('div');
+    dp.className = 'filter-pill-dropdown';
+    dp.hidden = true;
+    dp.innerHTML =
+      '<div class="filter-pill-dropdown__body">' +
+        '<p class="filter-pill-dropdown__hint">Select options for <strong>' + filter.label + '</strong>…</p>' +
+      '</div>' +
+      '<div class="filter-pill-dropdown__footer">' +
+        '<button type="button" class="filter-pill-dropdown__clear">Clear</button>' +
+        '<button type="button" class="filter-pill-dropdown__apply">Apply</button>' +
+      '</div>';
+    dp.querySelector('.filter-pill-dropdown__clear').addEventListener('click', function (e) {
+      e.stopPropagation();
+      pill.classList.remove('filter-pill-added--applied');
+      closePillDropdown(pill);
+      updateBadge();
+    });
+    dp.querySelector('.filter-pill-dropdown__apply').addEventListener('click', function (e) {
+      e.stopPropagation();
+      pill.classList.add('filter-pill-added--applied');
+      closePillDropdown(pill);
+      updateBadge();
+    });
+    dp.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    pill.appendChild(labelBtn);
+    pill.appendChild(removeBtn);
+    pill.appendChild(dp);
+    addedContainer.appendChild(pill);
+
+    // Auto-open the dropdown immediately
+    openPillDropdown(pill);
+  }
+
+  function removeFilter(filterId) {
+    var pill = addedContainer.querySelector('[data-filter-id="' + filterId + '"]');
+    if (pill) {
+      if (openPillEl === pill) closePillDropdown(pill);
+      pill.remove();
+    }
+    addedIds = addedIds.filter(function (id) { return id !== filterId; });
+    updateBadge();
+    if (!dropdown.hidden) renderList(searchInput.value);
+  }
+
+  // ── All Filters dropdown open/close ───────────────────────────────────────
+
+  function openDropdown() {
+    dropdown.hidden = false;
+    triggerBtn.setAttribute('aria-expanded', 'true');
+    triggerBtn.classList.add('filter-chips-figma__dropdown--open');
+    searchInput.value = '';
+    renderList('');
+    searchInput.focus();
+  }
+
+  function closeDropdown() {
+    dropdown.hidden = true;
+    triggerBtn.setAttribute('aria-expanded', 'false');
+    triggerBtn.classList.remove('filter-chips-figma__dropdown--open');
+  }
+
+  triggerBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    dropdown.hidden ? openDropdown() : closeDropdown();
+  });
+
+  searchInput.addEventListener('input', function () {
+    renderList(searchInput.value);
+  });
+
+  dropdown.addEventListener('click', function (e) { e.stopPropagation(); });
+
+  document.addEventListener('click', function (e) {
+    if (!dropdown.hidden && !triggerBtn.contains(e.target)) closeDropdown();
+    if (openPillEl && !openPillEl.contains(e.target)) closePillDropdown(openPillEl);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (!dropdown.hidden) { closeDropdown(); triggerBtn.focus(); }
+      if (openPillEl) closePillDropdown(openPillEl);
+    }
+  });
+
+  updateBadge();
+})();
+</script>
+</body>
+</html>
